@@ -5,6 +5,7 @@ A modern, responsive hotel website built with **React** (frontend) and **Laravel
 ## 🎯 Key Features
 
 ### 👥 Guest Features
+
 - ✅ Hero section with CTAs
 - ✅ Room showcase with pricing
 - ✅ Reservation system with availability checking
@@ -15,6 +16,7 @@ A modern, responsive hotel website built with **React** (frontend) and **Laravel
 - ✅ Responsive design
 
 ### 🔐 Admin Features
+
 - ✅ Secure JWT authentication (Laravel Sanctum)
 - ✅ Manage reservations (view, edit status, delete)
 - ✅ Manage rooms (create, read, update, delete)
@@ -23,6 +25,7 @@ A modern, responsive hotel website built with **React** (frontend) and **Laravel
 - ✅ Protected API routes
 
 ### ⚙️ Backend Features
+
 - ✅ REST API with validation
 - ✅ JWT token-based authentication
 - ✅ Stripe payment processing
@@ -35,7 +38,7 @@ A modern, responsive hotel website built with **React** (frontend) and **Laravel
 
 ## 📁 Project Structure
 
-```
+```text
 Outspan Hotel Nyeri/
 ├── frontend/              # React app
 │   ├── public/
@@ -75,6 +78,7 @@ Outspan Hotel Nyeri/
 ### 1️⃣ Start Backend
 
 **Using Docker (Recommended):**
+
 ```bash
 cd backend
 docker-compose up -d
@@ -87,6 +91,7 @@ php artisan serve
 ```
 
 **Or Local MySQL:**
+
 ```bash
 cd backend
 composer install
@@ -94,7 +99,7 @@ php artisan migrate --seed
 php artisan serve
 ```
 
-✅ Backend runs at: **http://localhost:8000**
+✅ Backend runs at: **<http://localhost:8000>**
 
 ### 2️⃣ Start Frontend
 
@@ -104,18 +109,20 @@ npm install
 npm start
 ```
 
-✅ Frontend runs at: **http://localhost:3000**
+✅ Frontend runs at: **<http://localhost:3000>**
 
 ---
 
 ## 🔐 Admin Dashboard
 
 ### Access Admin Panel
+
 - Click **"Admin Panel"** link in footer (on public site)
 - Or press **Ctrl+A** to toggle
-- Or navigate to **http://localhost:3000** and click Admin Panel
+- Or navigate to **<http://localhost:3000>** and click Admin Panel
 
 ### Create Admin Account
+
 ```bash
 POST http://localhost:8000/api/register
 {
@@ -127,18 +134,21 @@ POST http://localhost:8000/api/register
 
 ### Admin Capabilities
 
-**Reservations Tab**
+#### Reservations Tab
+
 - View all guest bookings
 - Edit reservation status (pending, confirmed, paid, cancelled)
 - Delete reservations
 
-**Rooms Tab**
+#### Rooms Tab
+
 - View all rooms with pricing
 - Add new room types
 - Edit room details
 - Delete rooms
 
-**Contacts Tab**
+#### Contacts Tab
+
 - View customer inquiries
 - Track contact date and message
 
@@ -147,14 +157,17 @@ POST http://localhost:8000/api/register
 ## 💳 Payment Integration (Stripe)
 
 ### Setup Stripe
-1. Get test keys from https://dashboard.stripe.com
+
+1. Get test keys from <https://dashboard.stripe.com>
 2. Add to `backend/.env`:
+
    ```env
    STRIPE_PUBLIC_KEY=pk_test_your_key
    STRIPE_SECRET_KEY=sk_test_your_key
    ```
 
 ### Payment Flow
+
 1. Guest selects room and dates
 2. Clicks "Book Now"
 3. Payment modal appears
@@ -169,6 +182,7 @@ POST http://localhost:8000/api/register
 ## 📧 Email Setup
 
 ### Configure SMTP (Gmail Example)
+
 ```env
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
@@ -181,6 +195,7 @@ MAIL_FROM_NAME="Outspan Hotel"
 ```
 
 ### Emails Sent
+
 - Reservation confirmation after booking
 - Custom contact responses (optional)
 
@@ -189,7 +204,8 @@ MAIL_FROM_NAME="Outspan Hotel"
 ## 🔌 API Endpoints Summary
 
 ### Public (No Auth Required)
-```
+
+```text
 GET  /api/rooms                           # List rooms
 POST /api/reservations                    # Create booking
 POST /api/reservations/check-availability # Check availability
@@ -203,7 +219,8 @@ POST /api/register                        # Admin register
 ```
 
 ### Protected (Admin Only - Requires JWT Token)
-```
+
+```text
 GET  /api/reservations                    # List all reservations
 PUT  /api/reservations/{id}               # Update reservation
 DELETE /api/reservations/{id}             # Delete reservation
@@ -221,6 +238,7 @@ POST /api/logout                          # Admin logout
 ## 🧪 Testing
 
 ### Test Reservation
+
 ```bash
 curl -X POST http://localhost:8000/api/reservations \
   -H "Content-Type: application/json" \
@@ -236,6 +254,7 @@ curl -X POST http://localhost:8000/api/reservations \
 ```
 
 ### Test Admin Login
+
 ```bash
 curl -X POST http://localhost:8000/api/login \
   -H "Content-Type: application/json" \
@@ -246,6 +265,7 @@ curl -X POST http://localhost:8000/api/login \
 ```
 
 ### Test Protected Route
+
 ```bash
 curl -X GET http://localhost:8000/api/reservations \
   -H "Authorization: Bearer your_jwt_token"
@@ -256,7 +276,9 @@ curl -X GET http://localhost:8000/api/reservations \
 ## 🎨 Customization
 
 ### Change Colors/Fonts
+
 Edit `frontend/src/index.css`:
+
 ```css
 :root {
   --bg: #fff;
@@ -266,13 +288,16 @@ Edit `frontend/src/index.css`:
 ```
 
 ### Change Hotel Info
+
 - **Contact:** `frontend/src/components/Contact.js` (line 34-40)
 - **Hero:** `frontend/src/components/Hero.js` (line 8-9)
 - **Rooms:** `backend/database/seeders/RoomSeeder.php`
 
 ### Add Images
+
 Place images in:
-```
+
+```text
 frontend/public/assets/images/
 ├── about/
 ├── rooms/
@@ -287,27 +312,32 @@ frontend/public/assets/images/
 ## 📊 Database Schema
 
 ### Rooms
+
 ```sql
 id, name, type, size, occupancy, price_per_night, description, amenities (JSON)
 ```
 
 ### Reservations
+
 ```sql
 id, room_id, guest_name, guest_email, guest_phone, check_in, check_out,
 adults, children, room_type, special_requests, status, confirmation_code
 ```
 
 ### Admins
+
 ```sql
 id, name, email, password (hashed), role
 ```
 
 ### Contacts
+
 ```sql
 id, name, email, phone, subject, message, status
 ```
 
 ### Reviews
+
 ```sql
 id, guest_name, email, rating, comment, status
 ```
@@ -316,21 +346,22 @@ id, guest_name, email, rating, comment, status
 
 ## 🐛 Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| Frontend can't connect to API | Ensure backend runs at http://localhost:8000 |
-| Database connection error | Check MySQL is running, verify `.env` credentials |
-| CORS errors | Ensure `config/cors.php` includes http://localhost:3000 |
-| Email not sending | Test SMTP credentials via mailtrap.io |
-| Admin login fails | Verify token in localStorage isn't expired |
-| Stripe payment error | Check API keys in `.env`, use test mode keys |
-| Sanctum token issues | Run `php artisan migrate`, restart Laravel |
+| Issue                        | Solution                                                                 |
+| ---------------------------- | ------------------------------------------------------------------------ |
+| Frontend can't connect to API| Ensure backend runs at <http://localhost:8000>                           |
+| Database connection error    | Check MySQL is running, verify `.env` credentials                        |
+| CORS errors                  | Ensure `config/cors.php` includes <http://localhost:3000>                |
+| Email not sending            | Test SMTP credentials via mailtrap.io                                    |
+| Admin login fails            | Verify token in localStorage isn't expired                               |
+| Stripe payment error         | Check API keys in `.env`, use test mode keys                             |
+| Sanctum token issues         | Run `php artisan migrate`, restart Laravel                               |
 
 ---
 
 ## 🚢 Production Deployment
 
 ### Set Environment Variables
+
 ```env
 APP_ENV=production
 APP_DEBUG=false
@@ -339,6 +370,7 @@ MAIL_FROM_ADDRESS=info@outspan.ke
 ```
 
 ### Optimize Laravel
+
 ```bash
 php artisan config:cache
 php artisan route:cache
@@ -347,12 +379,14 @@ php artisan migrate --force
 ```
 
 ### Build React
+
 ```bash
 cd frontend
 npm run build
 ```
 
 ### Deploy Options
+
 - **Heroku:** `git push heroku main`
 - **DigitalOcean:** Use App Platform
 - **AWS:** EC2 + RDS + S3
@@ -373,6 +407,7 @@ npm run build
 ## ✨ What's Included
 
 ### Frontend (React)
+
 - Modern, responsive UI with CSS Grid/Flexbox
 - Client-side form validation
 - API integration with error handling
@@ -381,6 +416,7 @@ npm run build
 - Live chat assistant
 
 ### Backend (Laravel)
+
 - RESTful API with proper HTTP methods
 - JWT authentication via Sanctum
 - Database validation and relationships
@@ -390,6 +426,7 @@ npm run build
 - CORS middleware
 
 ### Database
+
 - 5 migrations (rooms, reservations, admins, contacts, reviews)
 - Sample data seeder with 5 room types
 - Proper timestamps and relationships
@@ -420,7 +457,7 @@ A: Yes, add WhatsApp link to Hero component: `<a href="https://wa.me/25479415151
 ## 📞 Contact Info
 
 - **Hotel Phone:** +254 794 151 515
-- **Email:** info@outspan.ke
+- **Email:** <info@outspan.ke>
 - **Location:** Nyeri, Kenya (near Mt. Kenya)
 
 ---
